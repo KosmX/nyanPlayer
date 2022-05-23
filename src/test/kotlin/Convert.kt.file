@@ -1,0 +1,22 @@
+import java.io.IOException
+import java.nio.file.Files
+import kotlin.io.path.Path
+
+fun main() {
+
+
+    val c = -42+256
+
+
+    val input = object{}.javaClass.getResourceAsStream("a")?:throw IOException("Could not open source")
+    val out = Files.newOutputStream(Path("converted"))
+
+    for (i in 0 until 0x74) {
+        out.write(input.read().let {
+            (it + c)%0x100
+        })
+    }
+
+    out.write(input.readAllBytes())
+
+}
